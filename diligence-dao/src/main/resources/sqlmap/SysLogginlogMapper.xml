@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.diligencetrack.diligencedao.SysLogginlogMapper" >
+  <resultMap id="BaseResultMap" type="com.diligencetrack.diligenceentity.SysLogginlog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="loggTime" property="loggtime" jdbcType="TIMESTAMP" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="logHours" property="loghours" jdbcType="TIMESTAMP" />
+    <result column="logMIns" property="logmins" jdbcType="TIMESTAMP" />
+    <result column="IP" property="ip" jdbcType="VARCHAR" />
+    <result column="offlineTime" property="offlinetime" jdbcType="TIMESTAMP" />
+    <result column="count" property="count" jdbcType="INTEGER" />
+    <result column="mdate" property="mdate" jdbcType="TIMESTAMP" />
+    <result column="modifier" property="modifier" jdbcType="VARCHAR" />
+    <result column="df" property="df" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, loggTime, userid, logHours, logMIns, IP, offlineTime, count, mdate, modifier, 
+    df
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.diligencetrack.diligenceentity.SysLogginlogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_logginlog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_logginlog
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_logginlog
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.diligencetrack.diligenceentity.SysLogginlogExample" >
+    delete from sys_logginlog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.diligencetrack.diligenceentity.SysLogginlog" >
+    insert into sys_logginlog (id, loggTime, userid, 
+      logHours, logMIns, IP, 
+      offlineTime, count, mdate, 
+      modifier, df)
+    values (#{id,jdbcType=INTEGER}, #{loggtime,jdbcType=TIMESTAMP}, #{userid,jdbcType=INTEGER}, 
+      #{loghours,jdbcType=TIMESTAMP}, #{logmins,jdbcType=TIMESTAMP}, #{ip,jdbcType=VARCHAR}, 
+      #{offlinetime,jdbcType=TIMESTAMP}, #{count,jdbcType=INTEGER}, #{mdate,jdbcType=TIMESTAMP}, 
+      #{modifier,jdbcType=VARCHAR}, #{df,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.diligencetrack.diligenceentity.SysLogginlog" >
+    insert into sys_logginlog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="loggtime != null" >
+        loggTime,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="loghours != null" >
+        logHours,
+      </if>
+      <if test="logmins != null" >
+        logMIns,
+      </if>
+      <if test="ip != null" >
+        IP,
+      </if>
+      <if test="offlinetime != null" >
+        offlineTime,
+      </if>
+      <if test="count != null" >
+        count,
+      </if>
+      <if test="mdate != null" >
+        mdate,
+      </if>
+      <if test="modifier != null" >
+        modifier,
+      </if>
+      <if test="df != null" >
+        df,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="loggtime != null" >
+        #{loggtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="loghours != null" >
+        #{loghours,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logmins != null" >
+        #{logmins,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="offlinetime != null" >
+        #{offlinetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="count != null" >
+        #{count,jdbcType=INTEGER},
+      </if>
+      <if test="mdate != null" >
+        #{mdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null" >
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="df != null" >
+        #{df,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.diligencetrack.diligenceentity.SysLogginlogExample" resultType="java.lang.Integer" >
+    select count(*) from sys_logginlog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_logginlog
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.loggtime != null" >
+        loggTime = #{record.loggtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userid != null" >
+        userid = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.loghours != null" >
+        logHours = #{record.loghours,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.logmins != null" >
+        logMIns = #{record.logmins,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ip != null" >
+        IP = #{record.ip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.offlinetime != null" >
+        offlineTime = #{record.offlinetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.count != null" >
+        count = #{record.count,jdbcType=INTEGER},
+      </if>
+      <if test="record.mdate != null" >
+        mdate = #{record.mdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifier != null" >
+        modifier = #{record.modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.df != null" >
+        df = #{record.df,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_logginlog
+    set id = #{record.id,jdbcType=INTEGER},
+      loggTime = #{record.loggtime,jdbcType=TIMESTAMP},
+      userid = #{record.userid,jdbcType=INTEGER},
+      logHours = #{record.loghours,jdbcType=TIMESTAMP},
+      logMIns = #{record.logmins,jdbcType=TIMESTAMP},
+      IP = #{record.ip,jdbcType=VARCHAR},
+      offlineTime = #{record.offlinetime,jdbcType=TIMESTAMP},
+      count = #{record.count,jdbcType=INTEGER},
+      mdate = #{record.mdate,jdbcType=TIMESTAMP},
+      modifier = #{record.modifier,jdbcType=VARCHAR},
+      df = #{record.df,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.diligencetrack.diligenceentity.SysLogginlog" >
+    update sys_logginlog
+    <set >
+      <if test="loggtime != null" >
+        loggTime = #{loggtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="loghours != null" >
+        logHours = #{loghours,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logmins != null" >
+        logMIns = #{logmins,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ip != null" >
+        IP = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="offlinetime != null" >
+        offlineTime = #{offlinetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="count != null" >
+        count = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="mdate != null" >
+        mdate = #{mdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null" >
+        modifier = #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="df != null" >
+        df = #{df,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.diligencetrack.diligenceentity.SysLogginlog" >
+    update sys_logginlog
+    set loggTime = #{loggtime,jdbcType=TIMESTAMP},
+      userid = #{userid,jdbcType=INTEGER},
+      logHours = #{loghours,jdbcType=TIMESTAMP},
+      logMIns = #{logmins,jdbcType=TIMESTAMP},
+      IP = #{ip,jdbcType=VARCHAR},
+      offlineTime = #{offlinetime,jdbcType=TIMESTAMP},
+      count = #{count,jdbcType=INTEGER},
+      mdate = #{mdate,jdbcType=TIMESTAMP},
+      modifier = #{modifier,jdbcType=VARCHAR},
+      df = #{df,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.3.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.diligenceTrack</groupId>
+	<artifactId>diligence-web</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>diligence-web</name>
+	<description>Demo project for Spring Boot</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.diligenceTrack</groupId>
+			<artifactId>diligence-service</artifactId>
+			<version>${version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.diligenceTrack</groupId>
+			<artifactId>diligence-entity</artifactId>
+			<version>${version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
+				<version>6.1.7</version>
+				<configuration>
+					<connectors>
+						<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+							<port>8888</port>
+							<maxIdleTime>30000</maxIdleTime>
+						</connector>
+					</connectors>
+					<webAppSourceDirectory>${project.build.directory}/${pom.artifactId}-${pom.version}
+					</webAppSourceDirectory>
+					<contextPath>/</contextPath>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>pre</id>
+			<properties>
+				<diligencetrack.name>diligencetrack-web</diligencetrack.name>
+				<diligencetrack.model>diligencetrack.com</diligencetrack.model>
+				<diligencetrack.jdbc.datasource.type>dbcp</diligencetrack.jdbc.datasource.type>
+				<diligencetrack.jdbc.driver>com.mysql.jdbc.Driver</diligencetrack.jdbc.driver>
+				<diligencetrack.jdbc.username>diligencetrack</diligencetrack.jdbc.username>
+				<diligencetrack.jdbc.password>diligencetrack@@123</diligencetrack.jdbc.password>
+				<diligencetrack.jdbc.dbName>diligencetrack-web</diligencetrack.jdbc.dbName>
+				<diligencetrack.jdbc.url>jdbc:mysql://database.${diligencetrack.model}:3306/${diligencetrack.jdbc.dbName}?characterEncoding=UTF-8
+				</diligencetrack.jdbc.url>
+				<diligencetrack.cached.address>cache.${diligencetrack.model}:11212</diligencetrack.cached.address>
+				<diligencetrack.cached.username></diligencetrack.cached.username>
+				<diligencetrack.cached.pwd></diligencetrack.cached.pwd>
+
+				<diligencetrack.cookie.expiry>86400</diligencetrack.cookie.expiry>
+				<diligencetrack.cookie.key>xLyhSVcQGix62o+zQZCl2+bC+t2fjZyx</diligencetrack.cookie.key>
+				<diligencetrack.cookie.user.name>user_name_sys</diligencetrack.cookie.user.name>
+				<diligencetrack.cookie.verify.name>user_verify_sys</diligencetrack.cookie.verify.name>
+				<diligencetrack.cookie.forget.name>user_forget_sys</diligencetrack.cookie.forget.name>
+				<diligencetrack.cookie.info.name>user_info_sys</diligencetrack.cookie.info.name>
+				<diligencetrack.cookie.domain.name>.${diligencetrack.model}</diligencetrack.cookie.domain.name>
+
+				<diligencetrack.app.id>FA8128A52CA04F04813BBDA61A26AFAF</diligencetrack.app.id>
+				<diligencetrack.app.name>OA办公管理系统</diligencetrack.app.name>
+
+				<diligencetrack.token.name>31963CBD8CA24DEFB48B9799766F0583</diligencetrack.token.name>
+				<diligencetrack.model.name>diligencetrack.${diligencetrack.model}</diligencetrack.model.name>
+				<diligencetrack.home.name>app.dashboard</diligencetrack.home.name>
+				<diligencetrack.static.model>${diligencetrack.model.name}/static</diligencetrack.static.model>
+				<diligencetrack.img.model>${diligencetrack.model.name}/static</diligencetrack.img.model>
+				<diligencetrack.file.model>${diligencetrack.model.name}/static</diligencetrack.file.model>
+				<diligencetrack.app.url>http://${diligencetrack.model.name}/lg/applist</diligencetrack.app.url>
+				<diligencetrack.log.level>DEBUG</diligencetrack.log.level>
+				<diligencetrack.log.path>/app/logs/${diligencetrack.model.name}</diligencetrack.log.path>
+				<diligencetrack.log.appender>FILE</diligencetrack.log.appender>
+				<!--接口配置-->
+				<diligencetrack.htmlUrl>/html/common/list</diligencetrack.htmlUrl>
+				<diligencetrack.dataUrl>/web/deal</diligencetrack.dataUrl>
+				<!--end-->
+				<diligencetrack.sysapi.url>http://sys.${diligencetrack.model}/sys/rpc</diligencetrack.sysapi.url>
+				<diligencetrack.sysapi.token>31963CBD8CA24DEFB48B9799766F0583</diligencetrack.sysapi.token>
+				<!--OA-RPC-->
+				<diligencetrack.oaapi.url>http://oa.${diligencetrack.model}/oa/rpc</diligencetrack.oaapi.url>
+				<diligencetrack.oaapi.token>31963CBD8CA24DEFB48B9799766F0583</diligencetrack.oaapi.token>
+
+				<diligencetrack.ftp.port>21</diligencetrack.ftp.port>
+				<diligencetrack.ftp.path>/static/upload</diligencetrack.ftp.path>
+				<diligencetrack.ftp.url>ftp.diligencetrack.com</diligencetrack.ftp.url>
+				<diligencetrack.ftp.username>ftp</diligencetrack.ftp.username>
+				<diligencetrack.ftp.password>ftp123</diligencetrack.ftp.password>
+			</properties>
+		</profile>
+	</profiles>
+</project>
